@@ -1904,12 +1904,12 @@ function initLoginPage(container) {
 
     // Handle Form Submits
     if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = e.target.querySelector('#login-email').value;
             const password = e.target.querySelector('#login-password').value;
             
-            const result = authManager.login(email, password);
+            const result = await authManager.login(email, password);
             if (result.success) {
                 // Check for redirect param
                 const urlParams = new URLSearchParams(window.location.search);
@@ -1922,7 +1922,7 @@ function initLoginPage(container) {
     }
 
     if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
+        signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = e.target.querySelector('#signup-name').value;
             const email = e.target.querySelector('#signup-email').value;
@@ -1938,7 +1938,7 @@ function initLoginPage(container) {
                 return;
             }
             
-            const result = authManager.register(name, email, password);
+            const result = await authManager.register(name, email, password);
             if (result.success) {
                 // Instantly redirect them like user experience wants
                 const urlParams = new URLSearchParams(window.location.search);
