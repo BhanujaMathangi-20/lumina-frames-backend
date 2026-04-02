@@ -249,14 +249,14 @@ const api = {
     enrichProduct: (p) => {
         return {
             ...p,
-            description: p.description || "Premium spectacles designed for the modern individual.",
-            type: p.type || "Full Rim",
-            frame: p.frame || "Titanium / Acetate",
-            lens: p.lens || "Blue-Light Blocking",
-            color: p.color || "Matte Finish",
-            size: p.size || "Standard",
-            features: p.features || ["UV Protection", "Anti-Scratch"],
-            stockCount: p.stockCount || 10
+            description: p.description,
+            type: p.type,
+            frame: p.frame,
+            lens: p.lens,
+            color: p.color,
+            size: p.size,
+            features: p.features,
+            stockCount: p.stockCount
         };
     },
 
