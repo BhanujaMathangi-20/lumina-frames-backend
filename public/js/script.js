@@ -262,7 +262,7 @@ const api = {
 
     getFeaturedProducts: async () => {
         try {
-            const res = await fetch('/api/products');
+            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/products');
             if(!res.ok) return mockDb.products.slice(0, 4).map(api.enrichProduct); // Fallback
             const data = await res.json();
             return data.slice(0, 4).map(api.enrichProduct);
@@ -274,7 +274,7 @@ const api = {
     
     getAllProducts: async () => {
         try {
-            const res = await fetch('/api/products');
+            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/products');
             if(!res.ok) return mockDb.products.map(api.enrichProduct);
             const data = await res.json();
             return data.map(api.enrichProduct);
@@ -286,7 +286,7 @@ const api = {
 
     getProductById: async (id) => {
         try {
-            const res = await fetch(`/api/products/${id}`);
+            const res = await fetch(`https://lumina-frames-backend-3.onrender.com/api/products/${id}`);
             if(!res.ok) throw new Error('Not found');
             const data = await res.json();
             return api.enrichProduct(data);
@@ -472,7 +472,7 @@ class AuthManager {
 
     async register(name, email, password) {
         try {
-            const res = await fetch('/api/auth/register', {
+            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })
@@ -491,7 +491,7 @@ class AuthManager {
 
     async login(email, password, silent = false) {
         try {
-            const res = await fetch('/api/auth/login', {
+            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
