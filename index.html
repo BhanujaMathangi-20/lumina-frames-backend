@@ -26,9 +26,32 @@
 
             <div class="nav-icons">
                 <a href="login.html" class="icon-link" style="font-weight: 600;">Login</a>
-                <a href="wishlist.html" class="icon-link wishlist-icon" style="font-weight: 600;">
-                    ❤️ <span id="wishlist-count">0</span>
-                </a>
+                <div class="wishlist-dropdown-container">
+                    <a href="wishlist.html" class="icon-link wishlist-icon" id="wishlist-toggle-btn" style="font-weight: 600;">
+                        ❤️ <span id="wishlist-count">0</span>
+                    </a>
+                    <div class="wishlist-dropdown" id="wishlist-dropdown">
+                        <div class="wishlist-tabs">
+                            <button class="wishlist-tab-btn active" data-target="wishlist-tab-saved">Wishlist</button>
+                            <button class="wishlist-tab-btn" data-target="wishlist-tab-shared">Shared</button>
+                            <button class="wishlist-tab-btn" data-target="wishlist-tab-recent">Recently Viewed</button>
+                        </div>
+                        <div class="wishlist-content">
+                            <div class="wishlist-panel active" id="wishlist-tab-saved">
+                                <!-- Populated dynamically -->
+                            </div>
+                            <div class="wishlist-panel" id="wishlist-tab-shared">
+                                <div class="empty-panel-msg">
+                                    <i class="fa-solid fa-share-nodes" style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--clr-text-muted);"></i>
+                                    <p>No shared items yet.</p>
+                                </div>
+                            </div>
+                            <div class="wishlist-panel" id="wishlist-tab-recent">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <a href="cart.html" class="icon-link cart-icon" style="font-weight: 600;">
                     Cart 🛒 <span id="cart-count">0</span>
                 </a>

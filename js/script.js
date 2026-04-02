@@ -228,6 +228,30 @@ class WishlistManager {
 }
 const wishlistManager = new WishlistManager();
 
+// --- RECENT ITEMS MANAGEMENT ---
+class RecentManager {
+    constructor() {
+        this.recent = JSON.parse(localStorage.getItem('recentViewed')) || [];
+    }
+
+    addRecent(product) {
+        // Remove if already exists to push to front
+        this.recent = this.recent.filter(item => item.id !== product.id);
+        this.recent.unshift(product);
+        if (this.recent.length > 10) {
+            this.recent = this.recent.slice(0, 10);
+        }
+        localStorage.setItem('recentViewed', JSON.stringify(this.recent));
+        if (typeof renderWishlistDropdown === 'function') renderWishlistDropdown();
+    }
+    
+    getRecent() {
+        return this.recent;
+    }
+}
+const recentManager = new RecentManager();
+
+
 // --- AUTHENTICATION STATE MANAGEMENT ---
 class AuthManager {
     constructor() {
@@ -408,7 +432,184 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginWrapper) {
         initLoginPage(loginWrapper);
     }
+
+    // 12. Global Header Search Enhancements
+    const voiceSearchBtn = document.getElementById('voice-search-btn');
+    const imageSearchBtn = document.getElementById('image-search-btn');
+    const imageUploadInput = document.getElementById('image-upload-input');
+
+    if (voiceSearchBtn) {
+        voiceSearchBtn.addEventListener('click', () => {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!SpeechRecognition) {
+                cartManager.showToast('⚠️ Voice search is not supported in your browser.');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => {
+                cartManager.showToast('🎙️ Listening...');
+                voiceSearchBtn.style.color = 'var(--clr-primary)';
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.value = transcript;
+                    searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    cartManager.showToast(`✅ Searched for: "${transcript}"`);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                cartManager.showToast(`⚠️ Voice input error: ${event.error}`);
+            };
+
+            recognition.onend = () => {
+                voiceSearchBtn.style.color = '';
+            };
+
+            recognition.start();
+        });
+    }
+
+    if (imageSearchBtn && imageUploadInput) {
+        imageSearchBtn.addEventListener('click', () => {
+            imageUploadInput.click();
+        });
+        
+        imageUploadInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                cartManager.showToast('📷 Image Upload Simulated!');
+                // simulate search logic
+                setTimeout(() => {
+                    const searchInput = document.getElementById('search-input');
+                    if (searchInput) {
+                        searchInput.value = 'Similar to uploaded image';
+                        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                }, 1000);
+            }
+        });
+    }
+
+    // 13. Wishlist Dropdown Logic
+    initWishlistDropdown();
 });
+
+function initWishlistDropdown() {
+    const containers = document.querySelectorAll('.wishlist-dropdown-container');
+    
+    containers.forEach(container => {
+        const btn = container.querySelector('#wishlist-toggle-btn');
+        const dropdown = container.querySelector('#wishlist-dropdown');
+        if (!btn || !dropdown) return;
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const wasActive = dropdown.classList.contains('active');
+            
+            // close all others
+            document.querySelectorAll('#wishlist-dropdown').forEach(d => d.classList.remove('active'));
+            
+            if (!wasActive) {
+                dropdown.classList.add('active');
+                renderWishlistDropdown(dropdown);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        const tabBtns = dropdown.querySelectorAll('.wishlist-tab-btn');
+        const panels = dropdown.querySelectorAll('.wishlist-panel');
+
+        tabBtns.forEach(tabBtn => {
+            tabBtn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+
+                tabBtn.classList.add('active');
+                const targetId = tabBtn.getAttribute('data-target');
+                dropdown.querySelector(`#${targetId}`).classList.add('active');
+            });
+        });
+    });
+}
+
+function renderWishlistDropdown(dropdownEl = null) {
+    if (!dropdownEl) {
+        document.querySelectorAll('#wishlist-dropdown.active').forEach(renderWishlistDropdown);
+        return;
+    }
+
+    const savedPanel = dropdownEl.querySelector('#wishlist-tab-saved');
+    const recentPanel = dropdownEl.querySelector('#wishlist-tab-recent');
+    
+    const wishItems = wishlistManager.wishlist;
+    if (savedPanel) {
+        if (wishItems.length === 0) {
+            savedPanel.innerHTML = `
+                <div class="empty-panel-msg">
+                    <i class="fa-regular fa-heart" style="font-size: 2rem;"></i>
+                    <p>Your wishlist is empty.</p>
+                </div>`;
+        } else {
+            let htmlStr = wishItems.map(item => `
+                <div class="wishlist-panel-item">
+                    <img src="${item.image}" alt="${item.title}" onclick="window.location.href='product.html?id=${item.id}'">
+                    <div class="wishlist-panel-item-details">
+                        <h4 onclick="window.location.href='product.html?id=${item.id}'">${item.title}</h4>
+                        <p>₹${item.price.toLocaleString('en-IN')}</p>
+                    </div>
+                    <button class="wishlist-panel-item-action" onclick="wishlistManager.removeItem('${item.id}'); renderWishlistDropdown();" aria-label="Remove">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <button class="wishlist-panel-item-action" onclick="const p = wishlistManager.wishlist.find(x=>x.id==='${item.id}'); if(p){cartManager.addItem(p); wishlistManager.removeItem('${item.id}'); renderWishlistDropdown(); loadCart && typeof loadCart === 'function' ? loadCart() : null;}" aria-label="Move to Cart">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </button>
+                </div>
+            `).join('');
+            
+            htmlStr += `
+                <div style="text-align:center; padding-top: 1rem; border-top: 1px solid var(--clr-border); margin-top: 1rem;">
+                    <button onclick="window.location.href='wishlist.html'" class="btn btn-outline" style="width: 100%; font-size: 0.9rem; padding: 0.5rem;">View Full Wishlist</button>
+                </div>
+            `;
+            savedPanel.innerHTML = htmlStr;
+        }
+    }
+
+    const recentItems = recentManager.getRecent();
+    if (recentPanel) {
+        if (recentItems.length === 0) {
+            recentPanel.innerHTML = `
+                <div class="empty-panel-msg">
+                    <i class="fa-solid fa-clock-rotate-left" style="font-size: 2rem;"></i>
+                    <p>No recently viewed items.</p>
+                </div>`;
+        } else {
+            recentPanel.innerHTML = recentItems.map(item => `
+                <div class="wishlist-panel-item">
+                    <img src="${item.image}" alt="${item.title}" onclick="window.location.href='product.html?id=${item.id}'">
+                    <div class="wishlist-panel-item-details">
+                        <h4 onclick="window.location.href='product.html?id=${item.id}'">${item.title}</h4>
+                        <p>₹${item.price.toLocaleString('en-IN')}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+}
 
 // Function to handle dynamic rendering of products
 async function renderFeaturedProducts(container) {
@@ -1104,6 +1305,8 @@ async function initProductPage(container) {
             container.innerHTML = '<div class="empty-cart-msg"><h2>Invalid Product ID.</h2><a href="products.html" class="btn btn-primary">Back to Shop</a></div>';
             return;
         }
+
+        recentManager.addRecent(product);
 
         const isWished = wishlistManager.isInWishlist(product.id);
         const stockStatusHtml = product.stockCount > 5 
