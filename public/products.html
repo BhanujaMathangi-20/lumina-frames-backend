@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shop all Lumina Spectacles - Men, Women, and Kids frames.">
+    <title>Products | Lumina Spectacles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            padding-top: calc(var(--nav-height) + 3rem);
+            padding-bottom: 3rem;
+            background-color: var(--clr-bg-light);
+            text-align: center;
+        }
+        .filters-toolbar {
+            padding-top: calc(var(--nav-height) + 3rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: none;
+            border: 1px solid var(--clr-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            color: var(--clr-text-main);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--clr-primary);
+            color: var(--clr-white);
+            border-color: var(--clr-primary);
+        }
+        .search-container {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-lg);
+            outline: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        .search-container input:focus {
+            border-color: var(--clr-primary);
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+        }
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--clr-text-muted);
+        }
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--clr-text-muted);
+            font-size: 1.2rem;
+            background: var(--clr-bg-light);
+            border-radius: var(--radius-md);
+        }
+        
+        @media (max-width: 768px) {
+            .filters-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-container {
+                max-width: 100%;
+            }
+            .category-filters {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container main-container">
+            <a href="index.html" class="logo">LUMINA<span>.</span></a>
+            
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html" class="active" style="color: var(--clr-primary); font-weight: 700;">Products</a>
+                <a href="face-scan.html" class="highlight-link">Virtual Try-On</a>
+            </div>
+
+            <div class="nav-icons">
+                <a href="login.html" class="icon-link" style="font-weight: 600;">Login</a>
+                <a href="wishlist.html" class="icon-link wishlist-icon" style="font-weight: 600;">
+                    ❤️ <span id="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-link cart-icon" style="font-weight: 600;">
+                    Cart 🛒 <span id="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="face-scan.html">Virtual Try-On</a>
+            <a href="login.html">Login / Register</a>
+        </div>
+    </nav>
+
+    <!-- Shop Layout -->
+
+    <!-- Shop Layout -->
+    <section class="section-padding main-container fade-in-up delay-1">
+        
+        <div class="filters-toolbar">
+            <div class="category-filters" id="category-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Men">Men</button>
+                <button class="filter-btn" data-filter="Women">Women</button>
+                <button class="filter-btn" data-filter="Kids">Kids</button>
+            </div>
+            
+            <div class="search-container enhanced-search">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search frames, categories...">
+                <button type="button" id="voice-search-btn" class="voice-search-btn" title="Voice Search">
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+                <button type="button" id="image-search-btn" class="image-search-btn" title="Image Search">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+                <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+            </div>
+        </div>
+
+        <!-- Products Grid (Dynamically Rendered) -->
+        <div class="products-grid" id="all-products-container">
+            <!-- Loader placeholder -->
+            <div class="loader"></div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="main-container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">LUMINA<span>.</span></a>
+                <p class="footer-desc">Premium eyewear designed for the modern individual. Experience true clarity and unmatched style.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop All</a></li>
+                    <li><a href="face-scan.html">Virtual Try-On</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Stay in the Loop</h4>
+                <p>Subscribe to our newsletter for exclusive offers and new arrivals.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom main-container">
+            <p>&copy; 2026 Lumina Spectacles. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
