@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure Checkout - Lumina Spectacles">
+    <title>Checkout | Lumina Spectacles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container main-container">
+            <a href="index.html" class="logo">LUMINA<span>.</span></a>
+            
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="face-scan.html" class="highlight-link">Virtual Try-On</a>
+            </div>
+
+            <div class="nav-icons">
+                <a href="login.html" class="icon-link" style="font-weight: 600;">Login</a>
+                <a href="wishlist.html" class="icon-link wishlist-icon" style="font-weight: 600;">
+                    ❤️ <span id="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-link cart-icon" style="font-weight: 600;">
+                    Cart 🛒 <span id="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="face-scan.html">Virtual Try-On</a>
+            <a href="login.html">Login / Register</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="cart-page-header">
+        <div class="main-container fade-in-up">
+            <h1 class="section-title">Checkout</h1>
+            <p class="section-subtitle">Complete your secure checkout.</p>
+        </div>
+    </header>
+
+    <!-- Checkout Layout -->
+    <section class="main-container fade-in-up delay-1">
+        <div class="checkout-layout">
+            <!-- Left Side: Form -->
+            <form id="checkout-form" class="checkout-form-container">
+                <h3>Delivery Details</h3>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your active mobile number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <textarea id="address" class="form-control" rows="3" placeholder="Enter complete delivery address" required></textarea>
+                </div>
+
+                <h3 style="margin-top: 3rem;">Payment Method</h3>
+                <div class="payment-methods-grid">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="Card" required>
+                        <i class="fa-regular fa-credit-card"></i> Card
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="UPI" required>
+                        <i class="fa-solid fa-qrcode"></i> UPI
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="COD" required>
+                        <i class="fa-solid fa-money-bill"></i> Cash on Delivery
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary checkout-btn" style="margin-top: 3rem;">Place Order</button>
+            </form>
+
+            <!-- Right Side: Summary -->
+            <div>
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div id="checkout-summary-total">
+                        <!-- Javascript will render total here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Success Modal -->
+    <div class="order-success-modal" id="order-success-modal">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <h2>Order Placed Successfully ✅</h2>
+            <p style="color: var(--clr-text-muted); margin-bottom: 2rem;">Thank you for shopping with Lumina Spectacles. Your premium frames are on their way!</p>
+            <button class="btn btn-primary" id="modal-home-btn" style="width: 100%; justify-content: center;">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="main-container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">LUMINA<span>.</span></a>
+                <p class="footer-desc">Premium eyewear designed for the modern individual. Experience true clarity and unmatched style.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop All</a></li>
+                    <li><a href="face-scan.html">Virtual Try-On</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Stay in the Loop</h4>
+                <p>Subscribe to our newsletter for exclusive offers and new arrivals.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom main-container">
+            <p>&copy; 2026 Lumina Spectacles. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

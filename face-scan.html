@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Virtual Try-On - Lumina Spectacles">
+    <title>Virtual Try-On | Lumina Spectacles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container main-container">
+            <a href="index.html" class="logo">LUMINA<span>.</span></a>
+            
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="face-scan.html" class="highlight-link active">Virtual Try-On</a>
+            </div>
+
+            <div class="nav-icons">
+                <a href="login.html" class="icon-link" style="font-weight: 600;">Login</a>
+                <a href="wishlist.html" class="icon-link wishlist-icon" style="font-weight: 600;">
+                    ❤️ <span id="wishlist-count">0</span>
+                </a>
+                <a href="cart.html" class="icon-link cart-icon" style="font-weight: 600;">
+                    Cart 🛒 <span id="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="face-scan.html" class="active">Virtual Try-On</a>
+            <a href="login.html">Login / Register</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="cart-page-header">
+        <div class="main-container fade-in-up">
+            <h1 class="section-title">Face Analysis</h1>
+            <p class="section-subtitle">Discover the perfect frames for your unique face shape.</p>
+        </div>
+    </header>
+
+    <!-- Scanner Layout -->
+    <section class="main-container fade-in-up delay-1" id="scan-layout">
+        <div class="scan-layout">
+            
+            <!-- Camera / Upload UI Placeholder -->
+            <div class="camera-box" id="camera-box">
+                <i class="fa-solid fa-camera" id="camera-icon"></i>
+                <div class="camera-overlay-text" id="camera-text">Upload a photo to begin</div>
+                <video id="camera-video" autoplay playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0;"></video>
+                <canvas id="camera-canvas" style="display: none;"></canvas>
+            </div>
+
+            <!-- Controls -->
+            <div class="scan-controls">
+                <div id="model-loading-indicator" style="margin-bottom: 1rem; color: var(--clr-primary); font-weight: 500;">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Loading AI Models...
+                </div>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                <button class="btn btn-outline" id="open-camera-btn">
+                    <i class="fa-solid fa-video"></i> Open Camera
+                </button>
+                <button class="btn btn-primary" id="capture-btn" style="display: none;">
+                    <i class="fa-solid fa-camera-retro"></i> Capture
+                </button>
+                <button class="btn btn-outline" id="upload-btn">
+                    <i class="fa-solid fa-upload"></i> Upload Photo
+                </button>
+                <button class="btn btn-primary" id="analyze-btn" disabled style="opacity: 0.6; cursor: not-allowed;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Face
+                </button>
+                <button class="btn btn-outline" id="how-it-works-btn">
+                    <i class="fa-regular fa-circle-question"></i> How it works
+                </button>
+                <button class="btn btn-outline" id="reset-scan-btn" style="display: none; margin-top: 0.5rem; width: 100%; border: 1px solid var(--clr-border); color: var(--clr-text-muted);">
+                    <i class="fa-solid fa-rotate-right"></i> Reset & Scan Again
+                </button>
+            </div>
+            
+            <!-- Manual Selection / Skip Scan Container -->
+            <div id="manual-selection-container" style="background: var(--clr-bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+                <p id="detection-status-text" style="margin-bottom: 1rem; text-align: center; color: var(--clr-text); font-size: 0.95rem; font-weight: 500;">
+                    AI detection may not be accurate. Please select your preference below (or skip scan).
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <button class="btn btn-primary override-btn" data-category="Women" style="width: 100%;">Continue as Women</button>
+                    <button class="btn btn-primary override-btn" data-category="Men" style="width: 100%;">Continue as Men</button>
+                    <button class="btn btn-outline override-btn" data-category="Kids" style="width: 100%;">Shop for Kids</button>
+                </div>
+            </div>
+
+            <!-- Explanation Box -->
+            <div class="explanation-box" id="explanation-box">
+                <h3 style="color: var(--clr-primary); margin-bottom: 0.5rem; font-size: 1.2rem;">How it works</h3>
+                <p>Face shape is determined based on face width, jawline, and proportions. Our algorithm analyzes these key points to suggest frames that perfectly balance your natural features.</p>
+            </div>
+
+            <!-- Scan Result Box -->
+            <div class="result-box" id="scan-result-box">
+                <div class="result-title" id="shape-result">Your face shape: <strong>...</strong></div>
+                <div class="result-subtitle" id="shape-subtitle">Analyzing proportions...</div>
+                
+                <h3 style="margin-top: 1.5rem; color: var(--clr-primary);">Recommended Frames for You</h3>
+
+                <!-- Recommended Items dynamically injected here -->
+                <div class="recommended-grid" id="recommended-frames-container"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="main-container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">LUMINA<span>.</span></a>
+                <p class="footer-desc">Premium eyewear designed for the modern individual. Experience true clarity and unmatched style.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop All</a></li>
+                    <li><a href="face-scan.html">Virtual Try-On</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Stay in the Loop</h4>
+                <p>Subscribe to our newsletter for exclusive offers and new arrivals.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom main-container">
+            <p>&copy; 2026 Lumina Spectacles. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
