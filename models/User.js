@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, // Simple plain string for now or bcrypt later
+    password: { type: String, required: true }, 
     cart: { type: Array, default: [] },
     wishlist: { type: Array, default: [] }
 }, { timestamps: true });

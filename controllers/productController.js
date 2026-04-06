@@ -3,7 +3,7 @@ const Product = require('../models/Product');
 // Get all products
 exports.getProducts = async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().select('id name price image description category badge brand shape');
         res.json(products);
     } catch (err) {
         res.status(500).json({ message: err.message });

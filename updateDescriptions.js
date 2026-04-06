@@ -7,23 +7,51 @@ mongoose.connect(process.env.MONGO_URI)
     console.log('Connected to DB. Updating descriptions...');
     const products = await Product.find({});
     
-    for (let p of products) {
-        let desc = '';
-        if (p.category === 'Men') {
-            desc = `Elevate your style with the ${p.title}. Crafted specifically for the modern man, these ${p.shape.toLowerCase()} frames offer unparalleled comfort and a sophisticated profile. Perfect for both office environments and weekend escapes.`;
-        } else if (p.category === 'Women') {
-            desc = `Discover elegance with the ${p.title}. Designed for the chic and confident woman, these beautiful ${p.shape.toLowerCase()} glasses blend contemporary fashion with timeless grace, ensuring you stand out in every crowd.`;
-        } else if (p.category === 'Kids') {
-            desc = `The ${p.title} is built for the playground! Ultra-durable, highly flexible, and stylish ${p.shape.toLowerCase()} frames ensure your little ones stay perfectly protected and comfortable all day long.`;
-        } else {
-            desc = `Experience the unmatched quality of the ${p.title}. A perfect balance of premium materials and cutting-edge design.`;
-        }
+    const generateDescription = (product) => {
+        const shape = (product.shape || 'classic').toLowerCase();
+        const brand = product.brand || 'Lumina';
+        const category = product.category || 'Unisex';
         
-        p.description = desc;
+        const catAdjs = {
+            'Men': ['masculine', 'distinguished', 'modern', 'sharp'],
+            'Women': ['feminine', 'elegant', 'chic', 'sophisticated'],
+            'Kids': ['playful', 'durable', 'adventurous', 'colorful'],
+            'Unisex': ['versatile', 'modern', 'sleek', 'stylish']
+        };
+        
+        const shapeStyles = {
+            'round': 'a vintage look, perfect for casual and creative styles',
+            'square': 'a sharp and professional appearance',
+            'rectangle': 'a structured and professional profile, perfect for daily wear',
+            'aviator': 'a timeless design, ideal for an adventurous and sporty aesthetic',
+            'cat-eye': 'a fashionable and expressive look',
+            'wayfarer': 'a classic, universally flattering vibe that never goes out of style',
+            'geometric': 'an avant-garde, modern vibe that stands out',
+        };
+        
+        const stylePhrase = shapeStyles[shape] || `a striking ${shape} silhouette that enhances any outfit`;
+        
+        const hash = String(product.id || product._id || '123').split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+        const catAdjList = catAdjs[category] || catAdjs['Unisex'];
+        const selectedCatAdj = catAdjList[hash % catAdjList.length];
+        
+        const brandPhrases = [
+            `Showcase your ${selectedCatAdj} sense of style with these signature ${brand} frames.`,
+            `Experience craftsmanship from ${brand} with this ${selectedCatAdj} piece.`,
+            `These ${brand} glasses redefine ${selectedCatAdj} elegance.`,
+            `Designed by ${brand}, these frames perfectly capture a ${selectedCatAdj} essence.`
+        ];
+        
+        const introPhrase = brandPhrases[hash % brandPhrases.length];
+        return `${introPhrase} Featuring a lightweight ${shape} frame, it offers ${stylePhrase}. Ideal for upgrading your daily eyewear collection.`;
+    };
+
+    for (let p of products) {
+        p.description = generateDescription(p);
         await p.save();
     }
     
-    console.log(`Successfully updated descriptions for ${products.length} products!`);
+    console.log(`Successfully updated complex unique descriptions for ${products.length} products!`);
     process.exit(0);
 })
 .catch(err => {

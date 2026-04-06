@@ -46,7 +46,7 @@ async function seed() {
         console.log(`Extracted ${mockDb.products.length} products to seed.`);
         
         // Send to remote
-        const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/products/seed', {
+        const res = await fetch('http://localhost:5000/api/products/seed', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(augmentedProducts)

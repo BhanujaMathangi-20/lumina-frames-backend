@@ -1,0 +1,44 @@
+﻿[
+    {
+        "NameTarget":  "ac-c9sxs5v-shard-00-00.ijnwrgp.mongodb.net",
+        "Priority":  0,
+        "Weight":  0,
+        "Port":  27017,
+        "Name":  "_mongodb._tcp.cluster0.ijnwrgp.mongodb.net",
+        "Type":  33,
+        "CharacterSet":  1,
+        "Section":  1,
+        "DataLength":  16,
+        "TTL":  60,
+        "QueryType":  33,
+        "Target":  "ac-c9sxs5v-shard-00-00.ijnwrgp.mongodb.net"
+    },
+    {
+        "NameTarget":  "ac-c9sxs5v-shard-00-01.ijnwrgp.mongodb.net",
+        "Priority":  0,
+        "Weight":  0,
+        "Port":  27017,
+        "Name":  "_mongodb._tcp.cluster0.ijnwrgp.mongodb.net",
+        "Type":  33,
+        "CharacterSet":  1,
+        "Section":  1,
+        "DataLength":  16,
+        "TTL":  60,
+        "QueryType":  33,
+        "Target":  "ac-c9sxs5v-shard-00-01.ijnwrgp.mongodb.net"
+    },
+    {
+        "NameTarget":  "ac-c9sxs5v-shard-00-02.ijnwrgp.mongodb.net",
+        "Priority":  0,
+        "Weight":  0,
+        "Port":  27017,
+        "Name":  "_mongodb._tcp.cluster0.ijnwrgp.mongodb.net",
+        "Type":  33,
+        "CharacterSet":  1,
+        "Section":  1,
+        "DataLength":  16,
+        "TTL":  60,
+        "QueryType":  33,
+        "Target":  "ac-c9sxs5v-shard-00-02.ijnwrgp.mongodb.net"
+    }
+]

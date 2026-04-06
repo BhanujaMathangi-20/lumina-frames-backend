@@ -65,6 +65,9 @@
 
             <!-- Controls -->
             <div class="scan-controls">
+                <div id="model-loading-indicator" style="margin-bottom: 1rem; color: var(--clr-primary); font-weight: 500;">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Loading AI Models...
+                </div>
                 <input type="file" id="image-upload" accept="image/*" style="display: none;">
                 <button class="btn btn-outline" id="open-camera-btn">
                     <i class="fa-solid fa-video"></i> Open Camera
@@ -81,6 +84,21 @@
                 <button class="btn btn-outline" id="how-it-works-btn">
                     <i class="fa-regular fa-circle-question"></i> How it works
                 </button>
+                <button class="btn btn-outline" id="reset-scan-btn" style="display: none; margin-top: 0.5rem; width: 100%; border: 1px solid var(--clr-border); color: var(--clr-text-muted);">
+                    <i class="fa-solid fa-rotate-right"></i> Reset & Scan Again
+                </button>
+            </div>
+            
+            <!-- Manual Selection / Skip Scan Container -->
+            <div id="manual-selection-container" style="background: var(--clr-bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+                <p id="detection-status-text" style="margin-bottom: 1rem; text-align: center; color: var(--clr-text); font-size: 0.95rem; font-weight: 500;">
+                    AI detection may not be accurate. Please select your preference below (or skip scan).
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <button class="btn btn-primary override-btn" data-category="Women" style="width: 100%;">Continue as Women</button>
+                    <button class="btn btn-primary override-btn" data-category="Men" style="width: 100%;">Continue as Men</button>
+                    <button class="btn btn-outline override-btn" data-category="Kids" style="width: 100%;">Shop for Kids</button>
+                </div>
             </div>
 
             <!-- Explanation Box -->
@@ -94,7 +112,8 @@
                 <div class="result-title" id="shape-result">Your face shape: <strong>...</strong></div>
                 <div class="result-subtitle" id="shape-subtitle">Analyzing proportions...</div>
                 
-                <h3 style="margin-top: 1rem; color: var(--clr-primary);">Recommended Frames for You</h3>
+                <h3 style="margin-top: 1.5rem; color: var(--clr-primary);">Recommended Frames for You</h3>
+
                 <!-- Recommended Items dynamically injected here -->
                 <div class="recommended-grid" id="recommended-frames-container"></div>
             </div>
@@ -156,6 +175,7 @@
     </footer>
 
     <!-- Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

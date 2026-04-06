@@ -8,237 +8,94 @@
 const mockDb = {
     products: [
         {
-            id: 'p1',
-            title: 'Lumina Phantom',
-            price: 10999,
-            category: 'Men',
+            id: 'p1', title: 'Lumina Phantom', price: 10999, category: 'Men',
             image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Bestseller',
-            brand: 'Lumina',
-            shape: 'Square'
+            badge: 'Bestseller', brand: 'Lumina', shape: 'Square'
         },
         {
-            id: 'p2',
-            title: 'Aura Clear View',
-            price: 7499,
-            category: 'Women',
-            image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'New',
-            brand: 'Ray-Ban',
-            shape: 'Round'
-        },
-        {
-            id: 'p3',
-            title: 'Titanium Edge',
-            price: 13499,
-            category: 'Men',
+            id: 'p2', title: 'Titanium Edge', price: 13499, category: 'Men',
             image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Oakley',
-            shape: 'Aviator'
+            badge: null, brand: 'Oakley', shape: 'Aviator'
         },
         {
-            id: 'p4',
-            title: 'Rose Gold Cat-Eye',
-            price: 9499,
-            category: 'Women',
-            image: 'https://images.unsplash.com/photo-1582142407894-ec85a1260a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Trending',
-            brand: 'Gucci',
-            shape: 'Cat-Eye'
-        },
-        {
-            id: 'p5',
-            title: 'Midnight Scholar',
-            price: 5499,
-            category: 'Kids',
-            image: 'https://images.unsplash.com/photo-1614715838608-dd527c46231d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Durable',
-            brand: 'Lumina',
-            shape: 'Square'
-        },
-        {
-            id: 'p6',
-            title: 'Classic Aviator',
-            price: 8999,
-            category: 'Men',
+            id: 'p3', title: 'Classic Aviator', price: 8999, category: 'Men',
             image: 'https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Ray-Ban',
-            shape: 'Round'
+            badge: null, brand: 'Ray-Ban', shape: 'Aviator'
         },
         {
-            id: 'p7',
-            title: 'Crystal Clear',
-            price: 6999,
-            category: 'Women',
+            id: 'p4', title: 'Urban Explorer', price: 14999, category: 'Men',
+            image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'New', brand: 'Lumina', shape: 'Square'
+        },
+        {
+            id: 'p5', title: 'Matte Finish Square', price: 11999, category: 'Men',
+            image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: null, brand: 'Oakley', shape: 'Square'
+        },
+        {
+            id: 'p6', title: 'Dynamic Flex', price: 11199, category: 'Men',
+            image: 'https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'Sale', brand: 'Lumina', shape: 'Geometric'
+        },
+        {
+            id: 'p7', title: 'Aura Clear View', price: 7499, category: 'Women',
+            image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'New', brand: 'Ray-Ban', shape: 'Round'
+        },
+        {
+            id: 'p8', title: 'Rose Gold Cat-Eye', price: 9499, category: 'Women',
+            image: 'https://images.unsplash.com/photo-1582142407894-ec85a1260a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'Trending', brand: 'Gucci', shape: 'Cat-Eye'
+        },
+        {
+            id: 'p9', title: 'Crystal Clear', price: 6999, category: 'Women',
             image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Popular',
-            brand: 'Oakley',
-            shape: 'Aviator'
+            badge: 'Popular', brand: 'Oakley', shape: 'Round'
         },
         {
-            id: 'p8',
-            title: 'Little Hero Frames',
-            price: 3999,
-            category: 'Kids',
-            image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Sale',
-            brand: 'Gucci',
-            shape: 'Cat-Eye'
-        },
-        // --- 5 NEW MEN PRODUCTS ---
-        {
-            id: 'p9',
-            title: 'Urban Explorer',
-            price: 1499,
-            category: 'Men',
-            image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Lumina',
-            shape: 'Square'
-        },
-        {
-            id: 'p10',
-            title: 'Classic Retro',
-            price: 1299,
-            category: 'Men',
-            image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Value',
-            brand: 'Ray-Ban',
-            shape: 'Round'
-        },
-        {
-            id: 'p11',
-            title: 'Matte Finish Square',
-            price: 1999,
-            category: 'Men',
-            image: 'https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Oakley',
-            shape: 'Aviator'
-        },
-        {
-            id: 'p12',
-            title: 'Slim Lightweight',
-            price: 1799,
-            category: 'Men',
-            image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Gucci',
-            shape: 'Cat-Eye'
-        },
-        {
-            id: 'p13',
-            title: 'Dynamic Flex',
-            price: 1199,
-            category: 'Men',
-            image: 'https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Sale',
-            brand: 'Lumina',
-            shape: 'Square'
-        },
-        // --- 5 NEW WOMEN PRODUCTS ---
-        {
-            id: 'p14',
-            title: 'Blush Pink Round',
-            price: 1899,
-            category: 'Women',
+            id: 'p10', title: 'Blush Pink Round', price: 18999, category: 'Women',
             image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Ray-Ban',
-            shape: 'Round'
+            badge: null, brand: 'Ray-Ban', shape: 'Round'
         },
         {
-            id: 'p15',
-            title: 'Tortoise Shell Chic',
-            price: 1699,
-            category: 'Women',
+            id: 'p11', title: 'Tortoise Shell Chic', price: 16999, category: 'Women',
             image: 'https://images.unsplash.com/photo-1582142407894-ec85a1260a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Trending',
-            brand: 'Oakley',
-            shape: 'Aviator'
+            badge: 'Trending', brand: 'Oakley', shape: 'Cat-Eye'
         },
         {
-            id: 'p16',
-            title: 'Golden Thread',
-            price: 1599,
-            category: 'Women',
+            id: 'p12', title: 'Golden Thread', price: 15999, category: 'Women',
             image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Value',
-            brand: 'Gucci',
-            shape: 'Cat-Eye'
+            badge: 'Value', brand: 'Gucci', shape: 'Cat-Eye'
         },
         {
-            id: 'p17',
-            title: 'Vintage Oversized',
-            price: 1399,
-            category: 'Women',
-            image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Lumina',
-            shape: 'Square'
-        },
-        {
-            id: 'p18',
-            title: 'Clear Aqua Frames',
-            price: 1999,
-            category: 'Women',
-            image: 'https://images.unsplash.com/photo-1582142407894-ec85a1260a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Ray-Ban',
-            shape: 'Round'
-        },
-        // --- 5 NEW KIDS PRODUCTS ---
-        {
-            id: 'p19',
-            title: 'Super Flex Blue',
-            price: 1099,
-            category: 'Kids',
-            image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Durable',
-            brand: 'Oakley',
-            shape: 'Aviator'
-        },
-        {
-            id: 'p20',
-            title: 'Sparkle Pink Tiny',
-            price: 1299,
-            category: 'Kids',
-            image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Gucci',
-            shape: 'Cat-Eye'
-        },
-        {
-            id: 'p21',
-            title: 'Junior Aviator',
-            price: 1499,
-            category: 'Kids',
-            image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: null,
-            brand: 'Lumina',
-            shape: 'Square'
-        },
-        {
-            id: 'p22',
-            title: 'Gamer Screen Shields',
-            price: 1999,
-            category: 'Kids',
+            id: 'p13', title: 'Midnight Scholar', price: 5499, category: 'Kids',
             image: 'https://images.unsplash.com/photo-1614715838608-dd527c46231d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'New',
-            brand: 'Ray-Ban',
-            shape: 'Round'
+            badge: 'Durable', brand: 'Lumina', shape: 'Rectangle'
         },
         {
-            id: 'p23',
-            title: 'Indestructible Green',
-            price: 1799,
-            category: 'Kids',
+            id: 'p14', title: 'Little Hero Frames', price: 3999, category: 'Kids',
             image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            badge: 'Value',
-            brand: 'Oakley',
-            shape: 'Aviator'
+            badge: 'Sale', brand: 'Gucci', shape: 'Round'
+        },
+        {
+            id: 'p15', title: 'Super Flex Blue', price: 3099, category: 'Kids',
+            image: 'https://images.unsplash.com/photo-1614715838608-dd527c46231d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'Durable', brand: 'Oakley', shape: 'Rectangle'
+        },
+        {
+            id: 'p16', title: 'Sparkle Pink Tiny', price: 3299, category: 'Kids',
+            image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: null, brand: 'Gucci', shape: 'Round'
+        },
+        {
+            id: 'p17', title: 'Junior Rectangles', price: 4499, category: 'Kids',
+            image: 'https://images.unsplash.com/photo-1614715838608-dd527c46231d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: null, brand: 'Lumina', shape: 'Rectangle'
+        },
+        {
+            id: 'p18', title: 'Indestructible Green', price: 4799, category: 'Kids',
+            image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            badge: 'Value', brand: 'Oakley', shape: 'Geometric'
         }
     ]
 };
@@ -247,9 +104,45 @@ const mockDb = {
 const api = {
     // Helper to enrich product missing fields for UI compatibility
     enrichProduct: (p) => {
+        // Generate dynamic descriptions for offline mockDb products, matching real DB behavior
+        let finalDesc = p.description;
+        if (!finalDesc || finalDesc === "Premium spectacles designed for the modern individual.") {
+            const shape = (p.shape || 'classic').toLowerCase();
+            const brand = p.brand || 'Lumina';
+            const category = p.category || 'Unisex';
+            const catAdjs = {
+                'Men': ['masculine', 'distinguished', 'modern', 'sharp'],
+                'Women': ['feminine', 'elegant', 'chic', 'sophisticated'],
+                'Kids': ['playful', 'durable', 'adventurous', 'colorful'],
+                'Unisex': ['versatile', 'modern', 'sleek', 'stylish']
+            };
+            const shapeStyles = {
+                'round': 'a vintage look, perfect for casual and creative styles',
+                'square': 'a sharp and professional appearance',
+                'rectangle': 'a structured and professional profile, perfect for daily wear',
+                'aviator': 'a timeless design, ideal for an adventurous and sporty aesthetic',
+                'cat-eye': 'a fashionable and expressive look',
+                'wayfarer': 'a classic, universally flattering vibe that never goes out of style',
+                'geometric': 'an avant-garde, modern vibe that stands out',
+            };
+            const hash = String(p.id || '123').split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+            const catAdjList = catAdjs[category] || catAdjs['Unisex'];
+            const introPhrase = [
+                `Showcase your ${catAdjList[hash % catAdjList.length]} sense of style with these signature ${brand} frames.`,
+                `Experience craftsmanship from ${brand} with this ${catAdjList[hash % catAdjList.length]} piece.`,
+                `These ${brand} glasses redefine ${catAdjList[hash % catAdjList.length]} elegance.`,
+                `Designed by ${brand}, these frames perfectly capture a ${catAdjList[hash % catAdjList.length]} essence.`
+            ][hash % 4];
+            const stylePhrase = shapeStyles[shape] || `a striking ${shape} silhouette that enhances any outfit`;
+            finalDesc = `${introPhrase} Featuring a lightweight ${shape} frame, it offers ${stylePhrase}. Ideal for upgrading your daily eyewear collection.`;
+        }
+
+        // Optimize image payload size explicitly for faster frontend rendering
+        const optimizedImage = p.image && typeof p.image === 'string' ? p.image.replace('&w=800&q=80', '&w=400&q=60') : p.image;
         return {
             ...p,
-            description: p.description,
+            image: optimizedImage,
+            description: finalDesc,
             type: p.type,
             frame: p.frame,
             lens: p.lens,
@@ -262,7 +155,8 @@ const api = {
 
     getFeaturedProducts: async () => {
         try {
-            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/products');
+            console.log('[API] Fetching Featured Products...');
+            const res = await fetch('/api/products');
             if(!res.ok) return mockDb.products.slice(0, 4).map(api.enrichProduct); // Fallback
             const data = await res.json();
             return data.slice(0, 4).map(api.enrichProduct);
@@ -274,7 +168,8 @@ const api = {
     
     getAllProducts: async () => {
         try {
-            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/products');
+            console.log('[API] Fetching All Products...');
+            const res = await fetch('/api/products');
             if(!res.ok) return mockDb.products.map(api.enrichProduct);
             const data = await res.json();
             return data.map(api.enrichProduct);
@@ -286,7 +181,8 @@ const api = {
 
     getProductById: async (id) => {
         try {
-            const res = await fetch(`https://lumina-frames-backend-3.onrender.com/api/products/${id}`);
+            console.log(`[API] Fetching Product Details ID: ${id}`);
+            const res = await fetch(`/api/products/${id}`);
             if(!res.ok) throw new Error('Not found');
             const data = await res.json();
             return api.enrichProduct(data);
@@ -380,7 +276,7 @@ const cartManager = new CartManager();
 // --- WISHLIST STATE MANAGEMENT ---
 class WishlistManager {
     constructor() {
-        this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [mockDb.products[0], mockDb.products[3]];
+        this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
         this.updateWishlistIcon();
     }
 
@@ -426,7 +322,7 @@ const wishlistManager = new WishlistManager();
 // --- RECENT ITEMS MANAGEMENT ---
 class RecentManager {
     constructor() {
-        this.recent = JSON.parse(localStorage.getItem('recentViewed')) || [mockDb.products[1], mockDb.products[5]];
+        this.recent = JSON.parse(localStorage.getItem('recentViewed')) || [];
     }
 
     addRecent(product) {
@@ -472,12 +368,14 @@ class AuthManager {
 
     async register(name, email, password) {
         try {
-            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/auth/register', {
+            console.log(`[AuthManager] Attempting to register ${email}...`);
+            const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })
             });
             const data = await res.json();
+            console.log(`[AuthManager] Register Response:`, data);
             if(!data.success) return { success: false, message: data.message };
             
             this.currentUser = { id: data.user.id, name: data.user.name, email: data.user.email };
@@ -491,12 +389,14 @@ class AuthManager {
 
     async login(email, password, silent = false) {
         try {
-            const res = await fetch('https://lumina-frames-backend-3.onrender.com/api/auth/login', {
+            console.log(`[AuthManager] Attempting to login ${email}...`);
+            const res = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
             const data = await res.json();
+            console.log(`[AuthManager] Login Response:`, data);
             if(!data.success) return { success: false, message: data.message };
             
             this.currentUser = { id: data.user.id, name: data.user.name, email: data.user.email };
@@ -511,11 +411,34 @@ class AuthManager {
         }
     }
 
+    async forgotPassword(email, newPassword) {
+        try {
+            console.log(`[AuthManager] Attempting to reset password for ${email}...`);
+            const res = await fetch('/api/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, newPassword })
+            });
+            const text = await res.text();
+            console.log(`[AuthManager] Forgot Password Response Text:`, text);
+            try {
+                return JSON.parse(text);
+            } catch (err) {
+                console.error("Non-JSON API response (could be 404/500 HTML):", text);
+                return { success: false, message: `Backend API unavailable or invalid text returned. HTTP ${res.status}` };
+            }
+        } catch (error) {
+            console.error("Forgot Password fetch error:", error);
+            return { success: false, message: error.message || 'Server error during password reset' };
+        }
+    }
+
     logout() {
         if (!this.currentUser) return;
         const name = this.currentUser.name;
         this.currentUser = null;
-        localStorage.removeItem('currentUser');
+        localStorage.clear();
+        sessionStorage.clear();
         this.updateAuthNav();
         
         if (typeof cartManager !== 'undefined') {
@@ -879,7 +802,7 @@ async function renderFeaturedProducts(container) {
                     <i class="${isWished ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                 </button>
                 <a href="product.html?id=${product.id}" class="product-image-container">
-                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
                 </a>
                 <div class="product-details">
                     <div class="product-category">${product.category}</div>
@@ -1002,7 +925,7 @@ async function initProductsPage(container) {
                         <i class="${isWished ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                     </button>
                     <a href="product.html?id=${product.id}" class="product-image-container">
-                        <img src="${product.image}" alt="${product.title}" class="product-image">
+                        <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
                     </a>
                     <div class="product-details">
                         <div class="product-category">${product.category}</div>
@@ -1424,7 +1347,7 @@ function initCheckoutPage(form) {
 }
 
 // Function to handle Face Scan Page Logic
-function initFaceScanPage(container) {
+async function initFaceScanPage(container) {
     const analyzeBtn = document.getElementById('analyze-btn');
     const howItWorksBtn = document.getElementById('how-it-works-btn');
     const uploadBtn = document.getElementById('upload-btn');
@@ -1436,8 +1359,170 @@ function initFaceScanPage(container) {
     const captureBtn = document.getElementById('capture-btn');
     const cameraVideo = document.getElementById('camera-video');
     const cameraCanvas = document.getElementById('camera-canvas');
+    const resetScanBtn = document.getElementById('reset-scan-btn');
+    const loadingIndicator = document.getElementById('model-loading-indicator');
 
     let videoStream = null;
+    let modelsLoaded = false;
+    let imageToAnalyze = new Image();
+
+    // Load AI Models
+    try {
+        const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/';
+        await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+            faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL)
+        ]);
+        modelsLoaded = true;
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+        }
+    } catch (err) {
+        console.error("Failed to load face-api models:", err);
+        if (loadingIndicator) {
+            loadingIndicator.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error loading AI models. Please refresh.';
+            loadingIndicator.style.color = 'red';
+        }
+    }
+
+    async function showResultsForCategory(category, randomShape, gender = null, isManual = false) {
+        const resultBox = document.getElementById('scan-result-box');
+        const recommendedContainer = document.getElementById('recommended-frames-container');
+        const shapeResult = document.getElementById('shape-result');
+        const shapeSubtitle = document.getElementById('shape-subtitle');
+        
+        if (shapeResult) {
+            let details = " (Saved Profile) ";
+            if (isManual) {
+                details = "  ";
+            } else if (gender) {
+                details = ` (Detected: ${gender}) `;
+            }
+            shapeResult.innerHTML = `Recommended for: <strong style="color:var(--clr-primary);">${category}</strong>${details}<br>Your face shape: <strong>${randomShape}</strong>`;
+        }
+        
+        
+        const overrideContainer = document.getElementById('manual-override-container');
+        if (overrideContainer) {
+            overrideContainer.style.display = 'block';
+        }
+        
+        if (shapeSubtitle) {
+            if (randomShape === 'Oval') {
+                shapeSubtitle.textContent = "Lucky you! Oval faces are incredibly versatile. We recommend geometric or softly rounded frames to maintain your natural balance.";
+            } else if (randomShape === 'Round') {
+                shapeSubtitle.textContent = "For round faces, sharp and angular frames work best to add definition and structure to your features.";
+            } else if (randomShape === 'Square') {
+                shapeSubtitle.textContent = "Square faces look fantastic with round, oval, or wire frames that soften strong jawlines.";
+            } else if (randomShape === 'Heart') {
+                shapeSubtitle.textContent = "Heart-shaped faces look great in frames that are wider at the bottom or have soft silhouettes like round and cat-eye frames.";
+            }
+        }
+        
+        resultBox.classList.add('active');
+        
+        setTimeout(() => {
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+        
+        try {
+            let allProducts = await api.getAllProducts();
+            
+            let categoryProducts = allProducts.filter(p => p.category === category);
+            if (categoryProducts.length === 0) categoryProducts = allProducts; 
+            
+            let shapeCompatible = [];
+            if (randomShape === 'Oval') {
+                shapeCompatible = categoryProducts.filter(p => p.shape === 'Square' || p.shape === 'Aviator');
+            } else if (randomShape === 'Round') {
+                shapeCompatible = categoryProducts.filter(p => p.shape === 'Square' || p.shape === 'Cat-Eye');
+            } else if (randomShape === 'Square') {
+                shapeCompatible = categoryProducts.filter(p => p.shape === 'Round' || p.shape === 'Aviator');
+            } else if (randomShape === 'Heart') {
+                shapeCompatible = categoryProducts.filter(p => p.shape === 'Round' || p.shape === 'Cat-Eye');
+            }
+
+            let recommended = shapeCompatible;
+            if (recommended.length < 5) {
+                const fallback = categoryProducts.filter(p => !recommended.includes(p));
+                recommended = recommended.concat(fallback);
+            }
+
+            recommended = recommended.slice(0, 5);
+            
+            recommendedContainer.innerHTML = '';
+            recommended.forEach(product => {
+                const badgeHtml = product.badge ? `<span class="product-badge">${product.badge}</span>` : '';
+                const isWished = wishlistManager.isInWishlist(product.id);
+                
+                const card = document.createElement('div');
+                card.className = 'product-card fade-in-up';
+                card.innerHTML = `
+                    ${badgeHtml}
+                    <button class="wishlist-btn ${isWished ? 'active' : ''}" data-id="${product.id}" aria-label="Add to Wishlist">
+                        <i class="${isWished ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                    </button>
+                    <a href="product.html?id=${product.id}" class="product-image-container" style="height: 180px;">
+                        <img src="${product.image}" alt="${product.title}" class="product-image">
+                    </a>
+                    <div class="product-details">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price-row">
+                            <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
+                            <button class="add-to-cart-btn" aria-label="Add to cart" data-id="${product.id}">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                recommendedContainer.appendChild(card);
+            });
+            attachAddToCartListeners(allProducts);
+            attachWishlistListeners(allProducts);
+        } catch (e) {
+            console.error("Failed to load recommendations", e);
+        }
+    }
+
+    // Checking if already scanned
+    const savedCategory = localStorage.getItem('userCategory');
+    if (savedCategory) {
+        showResultsForCategory(savedCategory, "Oval"); // Default shape for restoring past flow
+        if (resetScanBtn) resetScanBtn.style.display = 'block';
+    }
+
+    const manualKidsBtn = document.getElementById('shop-kids-btn');
+    if (manualKidsBtn) {
+        manualKidsBtn.addEventListener('click', () => {
+            localStorage.setItem('userCategory', 'Kids');
+            stopCamera();
+            cameraBox.style.backgroundImage = 'none';
+            if (cameraIcon) cameraIcon.style.display = 'none';
+            if (cameraText) cameraText.style.display = 'none';
+            analyzeBtn.disabled = true;
+            analyzeBtn.style.opacity = '0.6';
+            analyzeBtn.style.cursor = 'not-allowed';
+            if (resetScanBtn) resetScanBtn.style.display = 'block';
+            
+            showResultsForCategory('Kids', 'Round', null, true);
+        });
+    }
+
+    // Attach listeners for manual override buttons inside the result box
+    const overrideBtns = document.querySelectorAll('.override-btn');
+    if (overrideBtns.length > 0) {
+        overrideBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const newCategory = e.target.getAttribute('data-category');
+                if (newCategory) {
+                    localStorage.setItem('userCategory', newCategory);
+                    const shapes = ['Oval', 'Round', 'Square', 'Heart'];
+                    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+                    showResultsForCategory(newCategory, randomShape, null, true);
+                }
+            });
+        });
+    }
 
     function stopCamera() {
         if (videoStream) {
@@ -1456,6 +1541,30 @@ function initFaceScanPage(container) {
         }
     }
 
+    if (resetScanBtn) {
+        resetScanBtn.addEventListener('click', () => {
+            localStorage.removeItem('userCategory');
+            const resultBox = document.getElementById('scan-result-box');
+            if (resultBox) resultBox.classList.remove('active');
+            
+            const detectionStatus = document.getElementById('detection-status-text');
+            if (detectionStatus) {
+                detectionStatus.innerHTML = 'AI detection may not be accurate. Please select your preference below (or skip scan).';
+                detectionStatus.style.color = 'var(--clr-text)';
+            }
+            
+            stopCamera();
+            cameraBox.style.backgroundImage = 'none';
+            if (cameraIcon) cameraIcon.style.display = 'block';
+            if (cameraText) cameraText.style.display = 'block';
+            resetScanBtn.style.display = 'none';
+            analyzeBtn.disabled = true;
+            analyzeBtn.style.opacity = '0.6';
+            analyzeBtn.style.cursor = 'not-allowed';
+            if (openCameraBtn) openCameraBtn.innerHTML = '<i class="fa-solid fa-video"></i> Open Camera';
+        });
+    }
+
     if (openCameraBtn && cameraVideo) {
         openCameraBtn.addEventListener('click', async () => {
             try {
@@ -1464,7 +1573,7 @@ function initFaceScanPage(container) {
                 cameraVideo.style.display = 'block';
                 if (cameraIcon) cameraIcon.style.display = 'none';
                 if (cameraText) cameraText.style.display = 'none';
-                cameraBox.style.backgroundImage = 'none'; // clear any existing photo
+                cameraBox.style.backgroundImage = 'none'; 
                 
                 openCameraBtn.style.display = 'none';
                 uploadBtn.style.display = 'none';
@@ -1491,6 +1600,7 @@ function initFaceScanPage(container) {
             cameraBox.style.backgroundImage = `url(${imageDataUrl})`;
             cameraBox.style.backgroundSize = 'cover';
             cameraBox.style.backgroundPosition = 'center';
+            imageToAnalyze.src = imageDataUrl;
             
             stopCamera();
             
@@ -1509,10 +1619,12 @@ function initFaceScanPage(container) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
                 reader.onload = (ev) => {
-                    stopCamera(); // Stop live preview if they decide to upload mid-way
+                    stopCamera(); 
                     cameraBox.style.backgroundImage = `url(${ev.target.result})`;
                     cameraBox.style.backgroundSize = 'cover';
                     cameraBox.style.backgroundPosition = 'center';
+                    imageToAnalyze.src = ev.target.result;
+
                     if (cameraIcon) cameraIcon.style.display = 'none';
                     if (cameraText) cameraText.style.display = 'none';
                     
@@ -1527,79 +1639,52 @@ function initFaceScanPage(container) {
     
     if (analyzeBtn) {
         analyzeBtn.addEventListener('click', async () => {
-            const resultBox = document.getElementById('scan-result-box');
-            const recommendedContainer = document.getElementById('recommended-frames-container');
-            const shapeResult = document.getElementById('shape-result');
-            const shapeSubtitle = document.getElementById('shape-subtitle');
-            
-            const shapes = ['Oval', 'Round', 'Square'];
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            
-            if (shapeResult) {
-                shapeResult.innerHTML = `Your face shape: <strong>${randomShape}</strong>`;
+            if (!modelsLoaded) {
+                alert("AI models are still loading, please wait.");
+                return;
             }
-            
-            if (shapeSubtitle) {
-                if (randomShape === 'Oval') {
-                    shapeSubtitle.textContent = "Lucky you! Oval faces are incredibly versatile. We recommend geometric or softly rounded frames to maintain your natural balance.";
-                } else if (randomShape === 'Round') {
-                    shapeSubtitle.textContent = "For round faces, sharp and angular frames work best to add definition and structure to your features.";
-                } else {
-                    shapeSubtitle.textContent = "Square faces look fantastic with round, oval, or wire frames that soften strong jawlines.";
-                }
-            }
-            
-            // Show result block
-            resultBox.classList.add('active');
-            
-            // Scroll to it slightly
-            setTimeout(() => {
-                resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-            
+
+            analyzeBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
+            analyzeBtn.disabled = true;
+
             try {
-                let allProducts = await api.getAllProducts();
-                let recommended = [];
-                // Simple logic for choosing frames
-                if (randomShape === 'Oval') {
-                    recommended = allProducts.slice(0, 2);
-                } else if (randomShape === 'Round') {
-                    recommended = allProducts.slice(2, 4);
-                } else {
-                    recommended = allProducts.slice(4, 6);
-                }
+                const detections = await faceapi.detectSingleFace(imageToAnalyze, new faceapi.TinyFaceDetectorOptions()).withAgeAndGender();
                 
-                recommendedContainer.innerHTML = '';
-                recommended.forEach(product => {
-                    const badgeHtml = product.badge ? `<span class="product-badge">${product.badge}</span>` : '';
-                    const isWished = wishlistManager.isInWishlist(product.id);
-                    
-                    const card = document.createElement('div');
-                    card.className = 'product-card fade-in-up';
-                    card.innerHTML = `
-                        ${badgeHtml}
-                        <button class="wishlist-btn ${isWished ? 'active' : ''}" data-id="${product.id}" aria-label="Add to Wishlist">
-                            <i class="${isWished ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-                        </button>
-                        <a href="product.html?id=${product.id}" class="product-image-container" style="height: 180px;">
-                            <img src="${product.image}" alt="${product.title}" class="product-image">
-                        </a>
-                        <div class="product-details">
-                            <h3 class="product-title">${product.title}</h3>
-                            <div class="product-price-row">
-                                <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
-                                <button class="add-to-cart-btn" aria-label="Add to cart" data-id="${product.id}">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    recommendedContainer.appendChild(card);
-                });
-                attachAddToCartListeners(allProducts);
-                attachWishlistListeners(allProducts);
-            } catch (e) {
-                console.error("Failed to load recommendations", e);
+                analyzeBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Face';
+                analyzeBtn.disabled = false;
+
+                const detectionStatus = document.getElementById('detection-status-text');
+
+                if (!detections) {
+                    if (detectionStatus) {
+                        detectionStatus.innerHTML = "Could not detect face securely. Please choose your category manually below.";
+                        detectionStatus.style.color = 'var(--clr-error)';
+                    }
+                    return;
+                }
+
+                const { gender, genderProbability } = detections;
+                const confPercentage = Math.round(genderProbability * 100);
+
+                if (detectionStatus) {
+                    if (genderProbability < 0.7) {
+                        detectionStatus.innerHTML = `Could not detect clearly (confidence: ${confPercentage}%). Please select your preference below. <br><span style="font-size: 0.85rem; color: var(--clr-text-muted);">Detection may not be accurate.</span>`;
+                        detectionStatus.style.color = 'var(--clr-error)';
+                    } else {
+                        const genderLabel = gender === 'female' ? 'Women' : 'Men';
+                        detectionStatus.innerHTML = `AI Detected: <strong>${genderLabel}</strong> (confidence: ${confPercentage}%). Please confirm below to continue. <br><span style="font-size: 0.85rem; color: var(--clr-text-muted);">Detection may not be accurate.</span>`;
+                        detectionStatus.style.color = 'var(--clr-primary)';
+                    }
+                }
+            } catch(err) {
+                console.error(err);
+                const detectionStatus = document.getElementById('detection-status-text');
+                if (detectionStatus) {
+                    detectionStatus.innerHTML = "Error during face analysis. Please choose your category manually below.";
+                    detectionStatus.style.color = 'var(--clr-error)';
+                }
+                analyzeBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Face';
+                analyzeBtn.disabled = false;
             }
         });
     }
@@ -1879,46 +1964,133 @@ async function initProductPage(container) {
 
 // Function to handle Login Page Logic
 function initLoginPage(container) {
+    // Reset forms cleanly on page load
+    const resetTargets = ['login-form', 'signup-form', 'forgot-password-form'];
+    resetTargets.forEach(id => document.getElementById(id)?.reset());
+
     const loginForm = document.getElementById('login-form-block');
     const signupForm = document.getElementById('signup-form-block');
+    const resetForm = document.getElementById('forgot-password-form-block');
     
     const showLoginBtn = document.getElementById('show-login');
     const showSignupBtn = document.getElementById('show-signup');
+    const showForgotBtn = document.getElementById('show-forgot-password');
+    const backToLoginBtn = document.getElementById('back-to-login');
 
     // Toggles
     if (showSignupBtn) {
         showSignupBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            loginForm.style.display = 'none';
-            signupForm.style.display = 'block';
+            if (loginForm) loginForm.style.display = 'none';
+            if (resetForm) resetForm.style.display = 'none';
+            if (signupForm) signupForm.style.display = 'block';
         });
     }
 
     if (showLoginBtn) {
         showLoginBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            signupForm.style.display = 'none';
-            loginForm.style.display = 'block';
+            if (signupForm) signupForm.style.display = 'none';
+            if (resetForm) resetForm.style.display = 'none';
+            if (loginForm) loginForm.style.display = 'block';
         });
+    }
+
+    if (showForgotBtn) {
+        showForgotBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (loginForm) loginForm.style.display = 'none';
+            if (signupForm) signupForm.style.display = 'none';
+            if (resetForm) resetForm.style.display = 'block';
+        });
+    }
+
+    if (backToLoginBtn) {
+        backToLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (resetForm) resetForm.style.display = 'none';
+            if (loginForm) loginForm.style.display = 'block';
+        });
+    }
+
+    // Reset Password Form Logic
+    if (resetForm) {
+        const toggleShowPassword = resetForm.querySelector('#reset-show-password');
+        if (toggleShowPassword) {
+            toggleShowPassword.addEventListener('change', (e) => {
+                const passField = resetForm.querySelector('#reset-new-password');
+                const confField = resetForm.querySelector('#reset-confirm-password');
+                const type = e.target.checked ? 'text' : 'password';
+                if (passField) passField.type = type;
+                if (confField) confField.type = type;
+            });
+        }
+
+        const resetFormEl = document.getElementById('forgot-password-form');
+        if (resetFormEl) {
+            resetFormEl.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log("[UI] Forgot Password form submitted. Prevent default applied.");
+                const email = e.target.querySelector('#reset-email').value;
+                const newPassword = e.target.querySelector('#reset-new-password').value;
+                const confirm = e.target.querySelector('#reset-confirm-password').value;
+                
+                console.log(`[UI] Captured forgot password input for: ${email}`);
+                
+                const err = document.getElementById('reset-error-msg');
+                if (newPassword !== confirm) {
+                    if (err) { err.style.display = 'block'; err.textContent = "Passwords do not match"; err.style.color = "red"; }
+                    console.log("[UI ERROR] Passwords do not match.");
+                    return;
+                }
+                if (newPassword.length < 7) {
+                    if (err) { err.style.display = 'block'; err.textContent = "Password must be at least 7 characters"; err.style.color = "red"; }
+                    console.log("[UI ERROR] Password too short.");
+                    return;
+                }
+                if (err) err.style.display = 'none';
+                
+                const result = await authManager.forgotPassword(email, newPassword);
+                if (result.success) {
+                    if (err) { err.style.display = 'block'; err.textContent = "Password reset successful!"; err.style.color = "green"; }
+                    setTimeout(() => {
+                        resetForm.style.display = 'none';
+                        loginForm.style.display = 'block';
+                        e.target.reset();
+                        if (err) err.style.display = 'none';
+                    }, 2000);
+                } else {
+                    if (err) { err.style.display = 'block'; err.textContent = result.message || "User not found"; err.style.color = "red"; }
+                }
+            });
+        }
     }
 
     // Handle Form Submits
     if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
+        const loginFormEl = document.getElementById('login-form');
+        if (loginFormEl) {
+            loginFormEl.addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log("[UI] Login form submitted. Prevent default applied.");
             const email = e.target.querySelector('#login-email').value;
             const password = e.target.querySelector('#login-password').value;
             
+            console.log(`[UI] Captured login input for: ${email}`);
+            
             const result = await authManager.login(email, password);
             if (result.success) {
+                console.log("[UI] Login successful, redirecting...");
                 // Check for redirect param
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirect = urlParams.get('redirect') || 'index.html';
                 window.location.href = redirect;
             } else {
+                console.log(`[UI ERROR] Login failed: ${result.message}`);
                 alert(result.message);
             }
         });
+        }
     }
 
     if (signupForm) {
@@ -1930,13 +2102,20 @@ function initLoginPage(container) {
             const confirm = e.target.querySelector('#signup-confirm').value;
             
             if (password !== confirm) {
-                alert("Passwords do not match!");
+                const err = document.getElementById('signup-error-msg');
+                if (err) { err.style.display = 'block'; err.textContent = "Passwords do not match!"; }
+                else alert("Passwords do not match!");
                 return;
             }
-            if (password.length < 6) {
-                alert("Password must be at least 6 characters.");
+            if (password.length < 7) {
+                const err = document.getElementById('signup-error-msg');
+                if (err) { err.style.display = 'block'; err.textContent = "Password must be at least 7 characters long."; }
+                else alert("Password must be at least 7 characters long.");
                 return;
             }
+            
+            const err = document.getElementById('signup-error-msg');
+            if (err) err.style.display = 'none';
             
             const result = await authManager.register(name, email, password);
             if (result.success) {
@@ -1949,4 +2128,5 @@ function initLoginPage(container) {
             }
         });
     }
+
 }
