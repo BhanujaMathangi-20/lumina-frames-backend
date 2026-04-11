@@ -25,13 +25,6 @@
     /* Spacing & Layout */
     --max-width: 1280px;
     --nav-height: 60px;
-}
-
-@media (min-width: 768px) {
-    :root {
-        --nav-height: 80px;
-    }
-}
 
     /* Shadows & Radii */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -43,6 +36,12 @@
     
     /* Transitions */
     --transition: all 0.2s ease-out;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --nav-height: 80px;
+    }
 }
 
 /* --- Resets & Base Styles --- */
