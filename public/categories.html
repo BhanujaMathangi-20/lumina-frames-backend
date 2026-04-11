@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="View your cart - Lumina Spectacles">
-    <title>Your Cart | Lumina Spectacles</title>
+    <meta name="description" content="Lumina Spectacles - Shop our eyewear categories.">
+    <title>Shop by Category | Lumina Spectacles</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=1775895169063">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=1775895169064">
     <meta name="view-transition" content="same-origin">
+    <style>
+        .page-header-spacing {
+            padding-top: calc(var(--nav-height) + 3rem);
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -32,36 +40,31 @@
                 </a>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="face-scan.html">Virtual Try-On</a>
-            <a href="login.html">Login / Register</a>
-        </div>
     </nav>
 
-    <!-- Page Header -->
-    <header class="cart-page-header">
-        <div class="main-container fade-in-up">
-            <h1 class="section-title">Your Cart</h1>
-            <p class="section-subtitle">Review your frames before checkout.</p>
+    <!-- Categories Section -->
+    <section class="categories-section main-container section-padding page-header-spacing">
+        <div class="section-header">
+            <h2 class="section-title">Shop by Category</h2>
+            <p class="section-subtitle">Find the perfect frames tailored to your style</p>
         </div>
-    </header>
-
-    <!-- Cart Layout -->
-    <section class="main-container fade-in-up delay-1">
-        <div class="cart-layout">
-            <!-- Left Side: Items -->
-            <div class="cart-items-container" id="cart-items-wrapper">
-                <!-- Javascript will render items here -->
+        <div class="categories-grid">
+            <div class="category-card men" onclick="window.location.href='products.html?category=men'">
+                <div class="category-content">
+                    <h3>Men's Collection</h3>
+                    <a href="products.html?category=men" class="btn-link">Shop Men <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
-
-            <!-- Right Side: Summary -->
-            <div class="cart-summary" style="display: none;">
-                <h3>Order Summary</h3>
-                <div id="cart-summary-total">
-                    <!-- Javascript will render total here -->
+            <div class="category-card women" onclick="window.location.href='products.html?category=women'">
+                <div class="category-content">
+                    <h3>Women's Collection</h3>
+                    <a href="products.html?category=women" class="btn-link">Shop Women <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="category-card kids" onclick="window.location.href='products.html?category=kids'">
+                <div class="category-content">
+                    <h3>Kids' Collection</h3>
+                    <a href="products.html?category=kids" class="btn-link">Shop Kids <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -120,32 +123,28 @@
         </div>
     </footer>
 
-                    <!-- Global Bottom Navigation Bar (Mobile) -->
+        <!-- Global Bottom Navigation Bar (Mobile) -->
     <div class="bottom-action-bar">
         <button class="action-bar-btn" onclick="window.location.href='index.html'">
             <i class="fa-solid fa-house"></i>
             <span class="action-text">Home</span>
         </button>
         <button class="action-bar-btn" onclick="window.location.href='categories.html'">
-            <i class="fa-solid fa-border-all"></i>
-            <span class="action-text">Categories</span>
+            <i class="fa-solid fa-border-all" style="color: var(--clr-accent);"></i>
+            <span class="action-text" style="color: var(--clr-accent);">Categories</span>
         </button>
         <button class="action-bar-btn" onclick="window.location.href='products.html'">
             <i class="fa-solid fa-glasses"></i>
             <span class="action-text">Products</span>
         </button>
         <button class="action-bar-btn" onclick="window.location.href='cart.html'">
-            <i class="fa-solid fa-cart-shopping" style="color: var(--clr-accent);"></i>
-            <span class="action-text" style="color: var(--clr-accent);">Cart</span>
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="action-text">Cart</span>
         </button>
         <button class="action-bar-btn" onclick="window.location.href='login.html'">
             <i class="fa-regular fa-user"></i>
             <span class="action-text">Profile</span>
         </button>
     </div>
-
-    <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
 </body>
 </html>
-

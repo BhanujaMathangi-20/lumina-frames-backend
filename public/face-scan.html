@@ -7,7 +7,8 @@
     <title>Virtual Try-On | Lumina Spectacles</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=1775895169067">
+    <meta name="view-transition" content="same-origin">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -22,16 +23,13 @@
             </div>
 
             <div class="nav-icons">
-                <a href="login.html" class="icon-link" style="font-weight: 600;">Login</a>
-                <a href="wishlist.html" class="icon-link wishlist-icon" style="font-weight: 600;">
-                    ❤️ <span id="wishlist-count">0</span>
+                <a href="login.html" class="icon-link"><i class="fa-regular fa-user"></i> <span class="nav-text">Login</span></a>
+                <a href="wishlist.html" class="icon-link wishlist-icon">
+                    <i class="fa-regular fa-heart"></i> <span id="wishlist-count">0</span>
                 </a>
-                <a href="cart.html" class="icon-link cart-icon" style="font-weight: 600;">
-                    Cart 🛒 <span id="cart-count">0</span>
+                <a href="cart.html" class="icon-link cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span>
                 </a>
-                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
             </div>
         </div>
         <!-- Mobile Navigation Menu -->
@@ -174,8 +172,33 @@
         </div>
     </footer>
 
+                    <!-- Global Bottom Navigation Bar (Mobile) -->
+    <div class="bottom-action-bar">
+        <button class="action-bar-btn" onclick="window.location.href='index.html'">
+            <i class="fa-solid fa-house"></i>
+            <span class="action-text">Home</span>
+        </button>
+        <button class="action-bar-btn" onclick="window.location.href='categories.html'">
+            <i class="fa-solid fa-border-all"></i>
+            <span class="action-text">Categories</span>
+        </button>
+        <button class="action-bar-btn" onclick="window.location.href='products.html'">
+            <i class="fa-solid fa-glasses"></i>
+            <span class="action-text">Products</span>
+        </button>
+        <button class="action-bar-btn" onclick="window.location.href='cart.html'">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="action-text">Cart</span>
+        </button>
+        <button class="action-bar-btn" onclick="window.location.href='login.html'">
+            <i class="fa-regular fa-user"></i>
+            <span class="action-text">Profile</span>
+        </button>
+    </div>
+
     <!-- Custom JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
+

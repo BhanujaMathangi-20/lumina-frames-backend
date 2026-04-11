@@ -155,26 +155,54 @@ const api = {
 
     getFeaturedProducts: async () => {
         try {
+            const cached = sessionStorage.getItem('api_featured');
+            if (cached) return JSON.parse(cached);
+
             console.log('[API] Fetching Featured Products...');
-            const res = await fetch('/api/products');
-            if(!res.ok) return mockDb.products.slice(0, 4).map(api.enrichProduct); // Fallback
-            const data = await res.json();
-            return data.slice(0, 4).map(api.enrichProduct);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 400); // 400ms timeout
+
+            const res = await fetch('/api/products', { signal: controller.signal });
+            clearTimeout(timeoutId);
+
+            let result;
+            if(!res.ok) {
+                result = mockDb.products.slice(0, 4).map(api.enrichProduct);
+            } else {
+                const data = await res.json();
+                result = data.slice(0, 4).map(api.enrichProduct);
+            }
+            sessionStorage.setItem('api_featured', JSON.stringify(result));
+            return result;
         } catch(e) {
-            console.error(e);
+            console.warn('[API] Fallback mode (Server offline or slow response):', e.message);
             return mockDb.products.slice(0, 4).map(api.enrichProduct);
         }
     },
     
     getAllProducts: async () => {
         try {
+            const cached = sessionStorage.getItem('api_all');
+            if (cached) return JSON.parse(cached);
+
             console.log('[API] Fetching All Products...');
-            const res = await fetch('/api/products');
-            if(!res.ok) return mockDb.products.map(api.enrichProduct);
-            const data = await res.json();
-            return data.map(api.enrichProduct);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 400); // 400ms timeout
+
+            const res = await fetch('/api/products', { signal: controller.signal });
+            clearTimeout(timeoutId);
+
+            let result;
+            if(!res.ok) {
+                result = mockDb.products.map(api.enrichProduct);
+            } else {
+                const data = await res.json();
+                result = data.map(api.enrichProduct);
+            }
+            sessionStorage.setItem('api_all', JSON.stringify(result));
+            return result;
         } catch(e) {
-            console.error(e);
+            console.warn('[API] Fallback mode (Server offline or slow response):', e.message);
             return mockDb.products.map(api.enrichProduct);
         }
     },
@@ -246,7 +274,7 @@ class CartManager {
         }
     }
 
-    showToast(message) {
+    showToast(message, type = 'success') {
         // Create toast container if it doesn't exist
         let toastContainer = document.querySelector('.toast-container');
         if (!toastContainer) {
@@ -256,8 +284,13 @@ class CartManager {
         }
 
         const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+        toast.className = `toast ${type}`;
+        
+        let icon = 'fa-circle-check';
+        if (type === 'error') icon = 'fa-circle-xmark';
+        else if (type === 'info') icon = 'fa-circle-info';
+
+        toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`;
         toastContainer.appendChild(toast);
 
         // Remove toast after 3 seconds
@@ -383,6 +416,7 @@ class AuthManager {
             this.updateAuthNav();
             return { success: true };
         } catch (error) {
+            cartManager.showToast('Server error during registration', 'error');
             return { success: false, message: 'Server error during registration' };
         }
     }
@@ -407,6 +441,7 @@ class AuthManager {
             }
             return { success: true };
         } catch (error) {
+            cartManager.showToast('Server error during login', 'error');
             return { success: false, message: 'Server error during login' };
         }
     }
@@ -429,6 +464,7 @@ class AuthManager {
             }
         } catch (error) {
             console.error("Forgot Password fetch error:", error);
+            cartManager.showToast(error.message || 'Server error during password reset', 'error');
             return { success: false, message: error.message || 'Server error during password reset' };
         }
     }
@@ -645,7 +681,87 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 13. Wishlist Dropdown Logic
     initWishlistDropdown();
+
+    // 14. Global Search Injection
+    injectGlobalSearch();
 });
+
+function getSkeletonHTML(count = 4) {
+    return Array(count).fill(0).map(() => `
+        <div class="product-card skeleton-card">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-text short"></div>
+            <div class="skeleton skeleton-text medium"></div>
+            <div class="skeleton skeleton-btn"></div>
+        </div>
+    `).join('');
+}
+
+function injectGlobalSearch() {
+    const navIcons = document.querySelector('.nav-icons');
+    if (!navIcons) return;
+
+    // Inject Search Icon if not present
+    if (!document.getElementById('global-search-trigger')) {
+        const searchBtn = document.createElement('a');
+        searchBtn.href = '#';
+        searchBtn.className = 'icon-link';
+        searchBtn.id = 'global-search-trigger';
+        searchBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+        navIcons.insertBefore(searchBtn, navIcons.firstChild);
+
+        // Inject Overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'global-search-overlay';
+        overlay.id = 'global-search-overlay';
+        overlay.innerHTML = `
+            <button class="global-search-close" id="global-search-close" aria-label="Close Search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="global-search-container">
+                <form id="global-search-form" style="position: relative;">
+                    <input type="text" class="global-search-input" id="global-search-input" placeholder="Search for shapes, brands or styles..." autocomplete="off">
+                    <button type="submit" class="global-search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="global-search-suggestions">
+                    <p style="color: var(--clr-text-light); font-size: 0.9rem; margin-bottom: 0.5rem;">Popular Searches</p>
+                    <div>
+                        <span class="search-suggestion-chip">Aviator</span>
+                        <span class="search-suggestion-chip">Ray-Ban</span>
+                        <span class="search-suggestion-chip">Cat-Eye</span>
+                        <span class="search-suggestion-chip">Titanium</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Event Listeners
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            overlay.classList.add('active');
+            setTimeout(() => document.getElementById('global-search-input').focus(), 100);
+        });
+
+        document.getElementById('global-search-close').addEventListener('click', () => {
+            overlay.classList.remove('active');
+        });
+
+        document.getElementById('global-search-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = document.getElementById('global-search-input').value.trim();
+            if (val) {
+                window.location.href = `products.html?search=${encodeURIComponent(val)}`;
+            }
+        });
+
+        document.querySelectorAll('.search-suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                window.location.href = `products.html?search=${encodeURIComponent(chip.textContent)}`;
+            });
+        });
+    }
+}
 
 function initWishlistDropdown() {
     const containers = document.querySelectorAll('.wishlist-dropdown-container');
@@ -704,9 +820,11 @@ function renderWishlistDropdown(dropdownEl = null) {
     if (savedPanel) {
         if (wishItems.length === 0) {
             savedPanel.innerHTML = `
-                <div class="empty-panel-msg">
-                    <i class="fa-regular fa-heart" style="font-size: 2rem;"></i>
-                    <p>Your wishlist is empty.</p>
+                <div class="empty-state-wrapper" style="padding: 2rem 1rem;">
+                    <div class="empty-state-icon" style="height: 60px; width: 60px; font-size: 2rem;">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <p style="margin-bottom: 0;">Your wishlist is empty.</p>
                 </div>`;
         } else {
             let htmlStr = wishItems.map(item => `
@@ -779,8 +897,8 @@ function renderWishlistDropdown(dropdownEl = null) {
 
 // Function to handle dynamic rendering of products
 async function renderFeaturedProducts(container) {
-    // Show explicit Loading... state
-    container.innerHTML = '<h3 style="grid-column: 1/-1; text-align:center;">Loading...</h3>';
+    // Show explicit animated Skeleton state
+    container.innerHTML = getSkeletonHTML(4);
     
     try {
         // Fetch data (simulated backend call)
@@ -880,8 +998,8 @@ function attachWishlistListeners(productsData) {
 
 // Function to handle Products Page Logic
 async function initProductsPage(container) {
-    // Show explicit Loading... state
-    container.innerHTML = '<h3 style="grid-column: 1/-1; text-align:center;">Loading...</h3>';
+    // Show explicit animated Skeleton state
+    container.innerHTML = getSkeletonHTML(8);
 
     try {
         let allProducts = await api.getAllProducts();
@@ -1024,6 +1142,12 @@ async function initProductsPage(container) {
                 targetBtn.classList.add('active');
                 initialFilterCategory = capitalizedCategory;
             }
+        }
+
+        const searchParam = urlParams.get('search');
+        if (searchParam) {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) searchInput.value = searchParam;
         }
         
         // Initial setup
@@ -1178,11 +1302,13 @@ function loadCart() {
 
     if (items.length === 0) {
         container.innerHTML = `
-            <div class="empty-cart-msg">
-                <i class="fa-solid fa-cart-arrow-down"></i>
+            <div class="empty-state-wrapper">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                </div>
                 <h2>Your cart is empty</h2>
-                <p style="margin-top: 1rem; margin-bottom: 2rem;">Looks like you haven't added any frames yet.</p>
-                <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+                <p>Looks like you haven't added any frames to your cart yet. Explore our collections and find your perfect pair.</p>
+                <a href="products.html" class="btn btn-primary" style="padding: 0.75rem 2rem;">Explore Frames</a>
             </div>
         `;
         if (summaryContainer) {
@@ -2130,3 +2256,40 @@ function initLoginPage(container) {
     }
 
 }
+
+// --- App-Like Page Transitions (Slide navigation) ---
+(function initPageTransitions() {
+    // If the browser natively supports View Transitions, don't interfere
+    // as our CSS handles it via @view-transition { navigation: auto; }
+    
+    // Add slide-in class to body to ensure CSS slide-in occurs on conventional load
+    document.body.classList.add('slide-in-right');
+
+    document.addEventListener('click', (e) => {
+        // Find closest anchor tag
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        // Let external links or hash links behave normally
+        if (!href || href.startsWith('http') || href.startsWith('#')) return;
+        
+        // Prevent default and trigger slide out
+        e.preventDefault();
+        
+        // Decide direction: Home vs Deep
+        // Typical mobile: Clicking 'home' slides back/right. Clicking a product goes deep/left.
+        if (href.includes('index.html') || href === '/') {
+            document.body.classList.remove('slide-in-right', 'slide-in-left');
+            document.body.classList.add('slide-out-right');
+        } else {
+            document.body.classList.remove('slide-in-right', 'slide-in-left');
+            document.body.classList.add('slide-out-left');
+        }
+
+        // Wait for CSS animation then navigate
+        setTimeout(() => {
+            window.location.href = href;
+        }, 220); // Syncs intimately with the 0.25s CSS animation
+    });
+})();
