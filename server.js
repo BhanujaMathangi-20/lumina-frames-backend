@@ -40,13 +40,17 @@ mongoose.connect(process.env.MONGO_URI)
         const count = await Product.countDocuments();
         if (count === 0) {
             console.log('Database empty, seeding products...');
-            // Need a way to fetch the mockDb, but since we're Server side, 
-            // I'll make a quick mockData.json or skip this and instruct them.
         }
     } catch(e) {}
-    
+})
+.catch(err => console.log('MongoDB connection error:', err));
+
+// Only natively listen if executed directly
+if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
     });
-})
-.catch(err => console.log('MongoDB connection error:', err));
+}
+
+// Export Express app for Vercel Serverless
+module.exports = app;
